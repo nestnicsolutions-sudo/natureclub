@@ -7,7 +7,7 @@ interface AnimatedBirdProps {
   size?: number;
   color?: string;
   className?: string;
-  onClick?: () => void;
+  onClick?: (animalName: string) => void;
 }
 
 export default function AnimatedBird({ 
@@ -19,8 +19,8 @@ export default function AnimatedBird({
   return (
     <motion.div
       className={`relative cursor-pointer ${className}`}
-      style={{ width: size, height: size }}
-      onClick={onClick}
+      style={{ width: `${size}px`, height: `${size}px` } as CSSProperties}
+      onClick={() => onClick && onClick('bird')}
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.9 }}
       animate={{
@@ -42,7 +42,7 @@ export default function AnimatedBird({
           borderRadius: '50% 50% 50% 50% / 60% 60% 40% 40%',
           left: '25%',
           top: '30%',
-        }}
+        } as any}
       />
       
       {/* Bird head */}
@@ -55,7 +55,7 @@ export default function AnimatedBird({
           borderRadius: '50%',
           left: '50%',
           top: '15%',
-        }}
+        } as any}
       />
       
       {/* Eye */}
@@ -66,7 +66,7 @@ export default function AnimatedBird({
           height: size * 0.12,
           left: '58%',
           top: '22%',
-        }}
+        } as any}
       >
         <div
           className="absolute bg-black rounded-full"
@@ -91,7 +91,7 @@ export default function AnimatedBird({
           left: '75%',
           top: '28%',
           filter: 'brightness(0.9)',
-        }}
+        } as any}
       />
       
       {/* Left wing */}
@@ -105,7 +105,7 @@ export default function AnimatedBird({
           left: '10%',
           top: '40%',
           filter: 'brightness(0.85)',
-        }}
+        } as any}
         animate={{
           rotate: [0, -15, 0],
         }}
@@ -126,7 +126,7 @@ export default function AnimatedBird({
           right: '10%',
           top: '40%',
           filter: 'brightness(0.85)',
-        }}
+        } as any}
         animate={{
           rotate: [0, 15, 0],
         }}

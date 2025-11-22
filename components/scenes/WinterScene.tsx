@@ -49,7 +49,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
               left: `${Math.random() * 100}%`,
               top: `-10%`,
               opacity: 0.6 + Math.random() * 0.4,
-            }}
+            } as any}
             animate={{
               y: ['0vh', '110vh'],
               x: [0, Math.random() * 50 - 25, Math.random() * 50 - 25],
@@ -74,7 +74,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `-10%`,
-              }}
+              } as any}
               animate={{
                 y: ['0vh', '110vh'],
                 x: [0, Math.random() * 60 - 30],
@@ -131,7 +131,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${8 + (i * 12)}%`,
                 top: `${5 + (i % 3) * 15}%`,
-              }}
+              } as any}
               animate={{
                 x: [0, 25, 0],
               }}
@@ -160,7 +160,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
             className="absolute bottom-0"
             style={{
               left: `${i * 10}%`,
-            }}
+            } as any}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: i * 0.1, duration: 0.8 }}
@@ -335,7 +335,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${15 + i * 12}%`,
             top: `${20 + (i % 3) * 20}%`,
-          }}
+          } as any}
           animate={{
             rotate: [0, 360],
             scale: [1, 1.2, 1],
@@ -490,13 +490,17 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
 
       {/* Flying birds (fewer in winter) */}
       {[...Array(3)].map((_, i) => (
-        <AnimatedBird 
+        <motion.div 
           key={i} 
-          x={160 + i * 180} 
-          y={100 + i * 35} 
-          delay={i} 
-          onClick={onAnimalClick} 
-        />
+          style={{ position: 'absolute', left: 160 + i * 180, top: 100 + i * 35 } as any}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i }}
+        >
+          <AnimatedBird 
+            onClick={onAnimalClick} 
+          />
+        </motion.div>
       ))}
 
       {/* Icicles hanging from top */}
@@ -506,7 +510,7 @@ export default function WinterScene({ onAnimalClick, weather = 'sunny', isNight 
           className="absolute top-0 z-20"
           style={{
             left: `${5 + i * 8}%`,
-          }}
+          } as any}
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1 }}
           transition={{ delay: 2 + i * 0.1, duration: 0.8 }}

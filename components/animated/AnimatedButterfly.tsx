@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 interface AnimatedButterflyProps {
   size?: number;
   className?: string;
-  onClick?: () => void;
+  onClick?: (animalName: string) => void;
 }
 
 export default function AnimatedButterfly({ 
@@ -16,8 +16,8 @@ export default function AnimatedButterfly({
   return (
     <motion.div
       className={`relative cursor-pointer ${className}`}
-      style={{ width: size, height: size * 0.8 }}
-      onClick={onClick}
+      style={{ width: size, height: size * 0.8 } as any}
+      onClick={() => onClick && onClick('butterfly')}
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.9 }}
       animate={{
@@ -52,7 +52,7 @@ export default function AnimatedButterfly({
           background: 'linear-gradient(135deg, #FF6B9D 0%, #FEC368 50%, #FF9A8B 100%)',
           borderRadius: '80% 20% 50% 50% / 80% 80% 20% 20%',
           transformOrigin: 'right center',
-        }}
+        } as any}
         animate={{
           rotateY: [0, 30, 0],
         }}
@@ -93,7 +93,7 @@ export default function AnimatedButterfly({
           background: 'linear-gradient(225deg, #FF6B9D 0%, #FEC368 50%, #FF9A8B 100%)',
           borderRadius: '20% 80% 50% 50% / 80% 80% 20% 20%',
           transformOrigin: 'left center',
-        }}
+        } as any}
         animate={{
           rotateY: [0, -30, 0],
         }}
@@ -134,7 +134,7 @@ export default function AnimatedButterfly({
           background: 'linear-gradient(135deg, #C471ED 0%, #F64F59 100%)',
           borderRadius: '50% 20% 80% 50% / 50% 20% 80% 50%',
           transformOrigin: 'right center',
-        }}
+        } as any}
         animate={{
           rotateY: [0, 30, 0],
         }}
@@ -155,7 +155,7 @@ export default function AnimatedButterfly({
           background: 'linear-gradient(225deg, #C471ED 0%, #F64F59 100%)',
           borderRadius: '20% 50% 50% 80% / 20% 50% 50% 80%',
           transformOrigin: 'left center',
-        }}
+        } as any}
         animate={{
           rotateY: [0, -30, 0],
         }}
@@ -176,7 +176,7 @@ export default function AnimatedButterfly({
           top: '0%',
           borderRadius: '50% 50% 0 0',
           transformOrigin: 'bottom',
-        }}
+        } as any}
         animate={{
           rotate: [-10, 10, -10],
         }}
@@ -206,7 +206,7 @@ export default function AnimatedButterfly({
           top: '0%',
           borderRadius: '50% 50% 0 0',
           transformOrigin: 'bottom',
-        }}
+        } as any}
         animate={{
           rotate: [10, -10, 10],
         }}

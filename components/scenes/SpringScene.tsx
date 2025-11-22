@@ -50,7 +50,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `-10%`,
-              }}
+              } as any}
               animate={{
                 y: ['0vh', '110vh'],
               }}
@@ -106,7 +106,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${10 + (i * 15)}%`,
                 top: `${10 + (i % 3) * 15}%`,
-              }}
+              } as any}
               animate={{
                 x: [0, 30, 0],
               }}
@@ -211,7 +211,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
             left: `${10 + Math.random() * 80}%`,
             top: `-5%`,
             background: i % 3 === 0 ? '#FFC0CB' : i % 3 === 1 ? '#FFB6C1' : 'white',
-          }}
+          } as any}
           animate={{
             y: ['0vh', '110vh'],
             x: [0, Math.random() * 100 - 50, Math.random() * 100 - 50],
@@ -236,7 +236,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
             style={{
               left: `${i}%`,
               height: `${20 + Math.random() * 40}px`,
-            }}
+            } as any}
             initial={{ scaleY: 0 }}
             animate={{ scaleY: 1 }}
             transition={{
@@ -254,7 +254,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
           <motion.div
             key={i}
             className="absolute"
-            style={{ left: `${i * 40}px` }}
+            style={{ left: `${i * 40}px` } as any}
             initial={{ scale: 0, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             transition={{ delay: 1 + i * 0.2, duration: 0.6 }}
@@ -272,13 +272,12 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
       {/* More Spring Flowers - Right Side */}
       <div className="absolute bottom-16 right-1/4 z-20">
         {[...Array(6)].map((_, i) => (
-          <AnimatedFlower 
-            key={i}
-            x={i * 50} 
-            y={Math.random() * 30}
-            color={i % 2 === 0 ? '#9370DB' : '#FFB6C1'}
-            delay={2 + i * 0.3}
-          />
+          <div key={i} style={{ position: 'absolute', left: i * 50, bottom: Math.random() * 30 }}>
+            <AnimatedFlower 
+              color={i % 2 === 0 ? '#9370DB' : '#FFB6C1'}
+              delay={2 + i * 0.3}
+            />
+          </div>
         ))}
       </div>
 
@@ -389,12 +388,30 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
 
       {/* Flying Birds */}
       {[...Array(4)].map((_, i) => (
-        <AnimatedBird key={i} x={100 + i * 150} y={50 + i * 30} delay={i * 0.5} onClick={onAnimalClick} />
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${100 + i * 150}px`, top: `${50 + i * 30}px` } as any}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.5 }}
+        >
+          <AnimatedBird onClick={onAnimalClick} />
+        </motion.div>
       ))}
 
       {/* Spring Butterflies */}
       {[...Array(6)].map((_, i) => (
-        <AnimatedButterfly key={i} x={150 + i * 100} y={200 + i * 50} delay={i * 0.8} onClick={onAnimalClick} />
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${150 + i * 100}px`, top: `${200 + i * 50}px` } as any}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.8 }}
+        >
+          <AnimatedButterfly onClick={onAnimalClick} />
+        </motion.div>
       ))}
 
       {/* Bees */}
@@ -405,7 +422,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${30 + i * 20}%`,
             top: `${40 + i * 10}%`,
-          }}
+          } as any}
           animate={{
             x: [0, 40, 80, 40, 0],
             y: [0, -20, -10, -30, 0],
@@ -443,7 +460,7 @@ export default function SpringScene({ onAnimalClick, weather = 'sunny', isNight 
               className="absolute bottom-24"
               style={{
                 left: `${15 + i * 18}%`,
-              }}
+              } as any}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 1 + i * 0.3, duration: 1 }}

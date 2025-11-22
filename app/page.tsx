@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GameProvider } from '@/contexts/GameContext';
 import SidebarNavigation from '@/components/navigation/SidebarNavigation';
 import ForestScene from '@/components/scenes/ForestScene';
 import MeadowScene from '@/components/scenes/MeadowScene';
@@ -14,21 +13,18 @@ import SpringScene from '@/components/scenes/SpringScene';
 import SummerScene from '@/components/scenes/SummerScene';
 import AutumnScene from '@/components/scenes/AutumnScene';
 import WinterScene from '@/components/scenes/WinterScene';
-import BadgePanel from '@/components/BadgePanel';
-import SoundManager from '@/components/SoundManager';
-import PlantGrowthGame from '@/components/features/PlantGrowthGame';
 import NatureQuests from '@/components/features/NatureQuests';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('forest');
   const [showIntro, setShowIntro] = useState(true);
   const [showFactPopup, setShowFactPopup] = useState(false);
-  const [showPlantGame, setShowPlantGame] = useState(false);
-  const [showQuests, setShowQuests] = useState(false);
   const [currentFact, setCurrentFact] = useState({ animal: '', fact: '' });
   const [weather, setWeather] = useState<'sunny' | 'rainy' | 'rainbow' | 'cloudy'>('sunny');
   const [isNight, setIsNight] = useState(false);
   const [showLightning, setShowLightning] = useState(false);
+  const [isWeatherCollapsed, setIsWeatherCollapsed] = useState(false);
+  const [showQuests, setShowQuests] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowIntro(false), 3500);
@@ -86,7 +82,6 @@ export default function Home() {
   };
 
   return (
-    <GameProvider>
       <main className="min-h-screen w-full overflow-hidden relative">
         {/* Intro animation */}
         <AnimatePresence>
@@ -139,16 +134,76 @@ export default function Home() {
               🌳 Nature Club
             </motion.h1>
             <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              <SoundManager />
-              <BadgePanel />
+              {/* Feature Buttons */}
+              <motion.button
+                className="bg-purple-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setShowQuests(true)}
+              >
+                🎯 Quest
+              </motion.button>
+              
+              <motion.button
+                className="bg-pink-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => alert("Kids Traits feature coming soon! (Face detection & Mood)")}
+              >
+                😊 Traits
+              </motion.button>
+              
+              <motion.button
+                className="bg-orange-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => alert("Games feature coming soon! (Grow a plant, etc.)")}
+              >
+                🎮 Games
+              </motion.button>
+
+              {/* Badge display */}
+              <motion.div
+                className="bg-yellow-400 text-yellow-900 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 rounded-full font-black text-sm sm:text-base md:text-lg shadow-lg"
+                whileHover={{ scale: 1.05 }}
+              >
+                🏆 0
+              </motion.div>
             </div>
           </div>
         </div>
 
         {/* Weather & Time Controls */}
-        <div className="fixed top-14 sm:top-16 md:top-20 lg:top-24 right-2 sm:right-4 md:right-8 z-40 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl p-3 sm:p-4 md:p-5 border-2 border-white">
-          <h3 className="text-sm sm:text-base md:text-lg font-black text-gray-800 mb-3 md:mb-4 text-center">🌤️ Weather</h3>
-          <div className="flex flex-col gap-2 sm:gap-2.5 md:gap-3">
+        <motion.div 
+          className="fixed top-14 sm:top-16 md:top-20 lg:top-24 right-2 sm:right-4 md:right-8 z-40 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border-2 border-white overflow-hidden"
+          animate={{ 
+            width: isWeatherCollapsed ? '60px' : 'auto',
+            height: isWeatherCollapsed ? '60px' : 'auto'
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {/* Fold/Unfold Button */}
+          <motion.button
+            onClick={() => setIsWeatherCollapsed(!isWeatherCollapsed)}
+            className="absolute top-2 right-2 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-purple-500 text-white rounded-full shadow-lg flex items-center justify-center z-50 hover:from-blue-500 hover:to-purple-600"
+            whileHover={{ scale: 1.1, rotate: 180 }}
+            whileTap={{ scale: 0.9 }}
+            title={isWeatherCollapsed ? 'Show Weather Panel' : 'Hide Weather Panel'}
+          >
+            <span className="text-xl sm:text-2xl font-bold">{isWeatherCollapsed ? '►' : '◄'}</span>
+          </motion.button>
+
+          <AnimatePresence>
+            {!isWeatherCollapsed && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ duration: 0.3 }}
+                className="p-3 sm:p-4 md:p-5"
+              >
+                <h3 className="text-sm sm:text-base md:text-lg font-black text-gray-800 mb-3 md:mb-4 text-center pr-10">🌤️ Weather</h3>
+                <div className="flex flex-col gap-2 sm:gap-2.5 md:gap-3">
             <motion.button
               onClick={() => {
                 setWeather('sunny');
@@ -234,7 +289,19 @@ export default function Home() {
               {isNight ? <><span className="text-2xl md:text-3xl">🌙</span> Night</> : <><span className="text-2xl md:text-3xl">☀️</span> Day</>}
             </motion.button>
           </div>
-        </div>
+        </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Quests Modal */}
+        <AnimatePresence>
+          {showQuests && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+              <NatureQuests onClose={() => setShowQuests(false)} />
+            </div>
+          )}
+        </AnimatePresence>
 
         {/* Sidebar Navigation */}
         <SidebarNavigation 
@@ -672,69 +739,7 @@ export default function Home() {
           )}
         </AnimatePresence>
 
-        {/* Plant Growth Game Modal */}
-        <AnimatePresence>
-          {showPlantGame && (
-            <PlantGrowthGame
-              onClose={() => setShowPlantGame(false)}
-              onComplete={() => {
-                setShowPlantGame(false);
-              }}
-            />
-          )}
-        </AnimatePresence>
 
-        {/* Quests Modal */}
-        <AnimatePresence>
-          {showQuests && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-              onClick={() => setShowQuests(false)}
-            >
-              <motion.div
-                initial={{ scale: 0.9, y: 50 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 50 }}
-                onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-6xl max-h-[90vh] overflow-auto rounded-3xl shadow-2xl"
-              >
-                <NatureQuests onClose={() => setShowQuests(false)} />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Floating action buttons */}
-        <div className="fixed bottom-8 right-8 flex flex-col gap-4 z-40">
-          <motion.button
-            onClick={() => {
-              setShowPlantGame(true);
-              const event = new CustomEvent('playSound', { detail: { type: 'buttonTap' } });
-              window.dispatchEvent(event);
-            }}
-            className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-full shadow-2xl flex items-center justify-center text-3xl"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            🌱
-          </motion.button>
-          <motion.button
-            onClick={() => {
-              setShowQuests(true);
-              const event = new CustomEvent('playSound', { detail: { type: 'buttonTap' } });
-              window.dispatchEvent(event);
-            }}
-            className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full shadow-2xl flex items-center justify-center text-3xl"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            🎯
-          </motion.button>
-        </div>
       </main>
-    </GameProvider>
   );
 }

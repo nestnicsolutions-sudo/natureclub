@@ -408,13 +408,18 @@ export default function AutumnScene({ onAnimalClick, weather = 'sunny', isNight 
 
       {/* More scattered birds */}
       {[...Array(4)].map((_, i) => (
-        <AnimatedBird 
-          key={i} 
-          x={140 + i * 160} 
-          y={80 + i * 30} 
-          delay={i * 0.8} 
-          onClick={onAnimalClick} 
-        />
+        <motion.div
+          key={i}
+          className="absolute"
+          style={{ left: `${140 + i * 160}px`, top: `${80 + i * 30}px` }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.8 }}
+        >
+          <AnimatedBird 
+            onClick={onAnimalClick} 
+          />
+        </motion.div>
       ))}
 
       {/* Hedgehog */}

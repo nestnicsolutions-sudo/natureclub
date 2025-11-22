@@ -7,13 +7,17 @@ interface AnimatedFlowerProps {
   stage?: number;
   className?: string;
   onClick?: () => void;
+  color?: string;
+  delay?: number;
 }
 
 export default function AnimatedFlower({ 
   size = 60,
   stage = 3,
   className = '',
-  onClick 
+  onClick,
+  color,
+  delay = 0
 }: AnimatedFlowerProps) {
   const petalCount = Math.min(stage + 3, 8);
   const centerSize = size * 0.25;
@@ -21,13 +25,13 @@ export default function AnimatedFlower({
   return (
     <motion.div
       className={`relative cursor-pointer ${className}`}
-      style={{ width: size, height: size }}
+      style={{ width: size, height: size } as any}
       onClick={onClick}
       whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.9 }}
       initial={{ scale: 0, rotate: -180 }}
       animate={{ scale: 1, rotate: 0 }}
-      transition={{ duration: 0.8, type: "spring" }}
+      transition={{ duration: 0.8, type: "spring", delay }}
     >
       {/* Stem */}
       {stage >= 1 && (
@@ -40,7 +44,7 @@ export default function AnimatedFlower({
             left: '46%',
             bottom: 0,
             borderRadius: '10% 10% 0 0',
-          }}
+          } as any}
           animate={{
             scaleY: [1, 1.03, 1],
           }}
@@ -59,7 +63,7 @@ export default function AnimatedFlower({
               left: '-80%',
               top: '40%',
               borderRadius: '0 50% 50% 0',
-            }}
+            } as any}
             animate={{
               rotate: [-10, 10, -10],
             }}
@@ -83,7 +87,7 @@ export default function AnimatedFlower({
         >
           {Array.from({ length: petalCount }).map((_, i) => {
             const angle = (360 / petalCount) * i;
-            const petalColor = stage >= 4 ? '#FF1744' : stage >= 3 ? '#FF4081' : '#FFB6C1';
+            const petalColor = color || (stage >= 4 ? '#FF1744' : stage >= 3 ? '#FF4081' : '#FFB6C1');
             
             return (
               <motion.div
@@ -98,7 +102,7 @@ export default function AnimatedFlower({
                   top: '50%',
                   transformOrigin: 'center center',
                   transform: `translate(-50%, -50%) rotate(${angle}deg) translateY(-${size * 0.18}px)`,
-                }}
+                } as any}
                 initial={{ scale: 0 }}
                 animate={{ 
                   scale: 1,
@@ -130,7 +134,7 @@ export default function AnimatedFlower({
             top: '25%',
             transform: 'translate(-50%, -50%)',
             boxShadow: '0 0 10px rgba(255, 215, 0, 0.5)',
-          }}
+          } as any}
           animate={{
             scale: [1, 1.1, 1],
           }}
@@ -175,7 +179,7 @@ export default function AnimatedFlower({
             style={{
               left: '20%',
               top: '15%',
-            }}
+            } as any}
             animate={{
               scale: [0, 1, 0],
               opacity: [0, 1, 0],
@@ -191,7 +195,7 @@ export default function AnimatedFlower({
             style={{
               right: '20%',
               top: '20%',
-            }}
+            } as any}
             animate={{
               scale: [0, 1, 0],
               opacity: [0, 1, 0],

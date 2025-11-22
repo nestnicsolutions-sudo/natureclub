@@ -80,7 +80,7 @@ export default function ForestScene({ onAnimalClick, weather = 'sunny', isNight 
       {/* Forest animals */}
       <motion.div
         className="absolute"
-        style={{ bottom: '28%', left: '40%' }}
+        style={{ bottom: '28%', left: '40%' } as any}
         whileHover={{ scale: 1.1 }}
       >
         <AnimatedBird 
@@ -92,7 +92,7 @@ export default function ForestScene({ onAnimalClick, weather = 'sunny', isNight 
       
       <motion.div
         className="absolute"
-        style={{ bottom: '18%', right: '35%' }}
+        style={{ bottom: '18%', right: '35%' } as any}
         whileHover={{ scale: 1.1 }}
       >
         <AnimatedDeer 
@@ -103,7 +103,7 @@ export default function ForestScene({ onAnimalClick, weather = 'sunny', isNight 
       
       <motion.div
         className="absolute"
-        style={{ bottom: '15%', left: '60%' }}
+        style={{ bottom: '15%', left: '60%' } as any}
         whileHover={{ scale: 1.1 }}
       >
         <AnimatedRabbit 
@@ -147,7 +147,7 @@ export default function ForestScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 60}%`,
-          }}
+          } as any}
           animate={{
             y: [0, -30, 0],
             x: [0, Math.random() * 20 - 10, 0],

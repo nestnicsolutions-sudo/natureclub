@@ -21,7 +21,7 @@ export default function AnimatedTree({
   return (
     <motion.div
       className={`relative cursor-pointer ${className}`}
-      style={{ width: size, height: treeHeight }}
+      style={{ width: size, height: treeHeight } as any}
       onClick={onClick}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
@@ -39,7 +39,7 @@ export default function AnimatedTree({
           left: '42.5%',
           bottom: 0,
           borderRadius: '10% 10% 0 0',
-        }}
+        } as any}
         animate={{
           scaleY: [1, 1.02, 1],
         }}
@@ -66,7 +66,7 @@ export default function AnimatedTree({
               left: `${(100 - (treeWidth / size * 100)) / 2}%`,
               bottom: treeHeight * 0.25,
               borderRadius: '50%',
-            }}
+            } as any}
             animate={{
               scale: [1, 1.05, 1],
             }}
@@ -88,7 +88,7 @@ export default function AnimatedTree({
                 left: `${(100 - (treeWidth * 0.85 / size * 100)) / 2}%`,
                 bottom: treeHeight * 0.4,
                 borderRadius: '50%',
-              }}
+              } as any}
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -112,7 +112,7 @@ export default function AnimatedTree({
                 left: `${(100 - (treeWidth * 0.7 / size * 100)) / 2}%`,
                 bottom: treeHeight * 0.55,
                 borderRadius: '50%',
-              }}
+              } as any}
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -135,7 +135,7 @@ export default function AnimatedTree({
                   height: size * 0.12,
                   left: '25%',
                   top: '35%',
-                }}
+                } as any}
                 animate={{
                   y: [0, -3, 0],
                   rotate: [-5, 5, -5],
@@ -152,7 +152,7 @@ export default function AnimatedTree({
                   height: size * 0.12,
                   right: '28%',
                   top: '40%',
-                }}
+                } as any}
                 animate={{
                   y: [0, -3, 0],
                   rotate: [5, -5, 5],
@@ -176,7 +176,7 @@ export default function AnimatedTree({
             style={{
               left: '30%',
               top: '20%',
-            }}
+            } as any}
             animate={{
               y: [0, 60],
               x: [0, -10, 10, 0],
@@ -194,7 +194,7 @@ export default function AnimatedTree({
             style={{
               right: '35%',
               top: '25%',
-            }}
+            } as any}
             animate={{
               y: [0, 60],
               x: [0, 10, -10, 0],

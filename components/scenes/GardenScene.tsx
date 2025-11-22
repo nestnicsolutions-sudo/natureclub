@@ -60,7 +60,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             bottom: '30%',
             left: `${left}%`,
-          }}
+          } as any}
           animate={{
             scale: [1, 1.02, 1],
           }}
@@ -104,7 +104,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
             className="absolute w-full h-0.5 bg-stone-800/50"
             style={{
               bottom: `${25 + row * 15}%`,
-            }}
+            } as any}
             animate={{
               opacity: [0.3, 0.5, 0.3],
             }}
@@ -189,7 +189,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
         <motion.div
           key={`herb-${left}`}
           className="absolute bottom-[14%]"
-          style={{ left: `${left}%` }}
+          style={{ left: `${left}%` } as any}
           animate={{
             scale: [1, 1.05, 1],
           }}
@@ -218,7 +218,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
           duration: 20,
           repeat: Infinity,
         }}
-        style={{ bottom: '25%', left: '10%' }}
+        style={{ bottom: '25%', left: '10%' } as any}
       >
         <AnimatedButterfly 
           size={65}
@@ -237,7 +237,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
           repeat: Infinity,
           delay: 5,
         }}
-        style={{ bottom: '35%', right: '10%' }}
+        style={{ bottom: '35%', right: '10%' } as any}
       >
         <AnimatedButterfly 
           size={70}
@@ -255,7 +255,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
           duration: 3,
           repeat: Infinity,
         }}
-        style={{ bottom: '45%', left: '45%' }}
+        style={{ bottom: '45%', left: '45%' } as any}
       >
         <AnimatedButterfly 
           size={60}
@@ -312,7 +312,7 @@ export default function GardenScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${20 + i * 15}%`,
             top: `${30 + Math.random() * 20}%`,
-          }}
+          } as any}
           animate={{
             x: [0, Math.random() * 60 - 30, 0],
             y: [0, Math.random() * 40 - 20, 0],

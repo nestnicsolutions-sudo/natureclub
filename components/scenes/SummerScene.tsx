@@ -57,7 +57,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 top: `${i * 12}%`,
                 background: `linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)`,
-              }}
+              } as any}
               animate={{
                 x: ['-100%', '200%'],
               }}
@@ -82,7 +82,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `-10%`,
-              }}
+              } as any}
               animate={{
                 y: ['0vh', '110vh'],
               }}
@@ -138,7 +138,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${15 + (i * 18)}%`,
                 top: `${8 + (i % 2) * 20}%`,
-              }}
+              } as any}
               animate={{
                 x: [0, 40, 0],
               }}
@@ -168,7 +168,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
             style={{
               left: `${(i * 0.67)}%`,
               height: `${30 + Math.random() * 60}px`,
-            }}
+            } as any}
             animate={{
               rotate: [0, 2, 0, -2, 0],
             }}
@@ -188,7 +188,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
           <motion.div
             key={i}
             className="absolute"
-            style={{ left: `${i * 60}px` }}
+            style={{ left: `${i * 60}px` } as any}
             initial={{ scale: 0, rotate: -20 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ delay: 0.5 + i * 0.2, duration: 0.8 }}
@@ -235,13 +235,12 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
       {/* Wild Flowers */}
       <div className="absolute bottom-32 right-24 z-20">
         {[...Array(10)].map((_, i) => (
-          <AnimatedFlower 
-            key={i}
-            x={i * 40} 
-            y={Math.random() * 40}
-            color={['#FF1493', '#FF69B4', '#9370DB', '#FFD700', '#FF6347'][i % 5]}
-            delay={i * 0.2}
-          />
+          <div key={i} style={{ position: 'absolute', left: i * 40, bottom: Math.random() * 40 }}>
+            <AnimatedFlower 
+              color={['#FF1493', '#FF69B4', '#9370DB', '#FFD700', '#FF6347'][i % 5]}
+              delay={i * 0.2}
+            />
+          </div>
         ))}
       </div>
 
@@ -283,13 +282,17 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
 
       {/* Butterflies (many) */}
       {[...Array(10)].map((_, i) => (
-        <AnimatedButterfly 
+        <motion.div 
           key={i} 
-          x={100 + i * 80} 
-          y={150 + (i % 3) * 80} 
-          delay={i * 0.5} 
-          onClick={onAnimalClick} 
-        />
+          style={{ position: 'absolute', left: 100 + i * 80, top: 150 + (i % 3) * 80 } as any}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.5 }}
+        >
+          <AnimatedButterfly 
+            onClick={onAnimalClick} 
+          />
+        </motion.div>
       ))}
 
       {/* Bees around flowers */}
@@ -300,7 +303,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${20 + i * 15}%`,
             top: `${50 + (i % 3) * 15}%`,
-          }}
+          } as any}
           animate={{
             x: [0, 30, 60, 30, 0],
             y: [0, -15, -5, -20, 0],
@@ -332,7 +335,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
           style={{
             left: `${30 + i * 20}%`,
             bottom: `${25 + i * 5}%`,
-          }}
+          } as any}
           animate={{
             x: [0, 20, 0],
           }}
@@ -394,13 +397,17 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
 
       {/* Birds */}
       {[...Array(5)].map((_, i) => (
-        <AnimatedBird 
+        <motion.div 
           key={i} 
-          x={120 + i * 140} 
-          y={60 + i * 25} 
-          delay={i * 0.7} 
-          onClick={onAnimalClick} 
-        />
+          style={{ position: 'absolute', left: 120 + i * 140, top: 60 + i * 25 } as any}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: i * 0.7 }}
+        >
+          <AnimatedBird 
+            onClick={onAnimalClick} 
+          />
+        </motion.div>
       ))}
 
       {/* Fireflies (only at dusk/night) */}
@@ -413,7 +420,7 @@ export default function SummerScene({ onAnimalClick, weather = 'sunny', isNight 
               style={{
                 left: `${10 + Math.random() * 80}%`,
                 top: `${20 + Math.random() * 60}%`,
-              }}
+              } as any}
               animate={{
                 opacity: [0, 1, 0],
                 scale: [0.5, 1, 0.5],
