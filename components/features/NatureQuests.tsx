@@ -67,32 +67,32 @@ export default function NatureQuests({ onClose }: NatureQuestsProps = {}) {
   };
 
   return (
-    <div className="bg-gradient-to-br from-purple-300 via-pink-300 to-yellow-300 rounded-3xl p-8 relative">
+    <div className="bg-gradient-to-br from-purple-300 via-pink-300 to-yellow-300 rounded-3xl p-4 md:p-8 relative w-full max-w-4xl max-h-[85vh] overflow-y-auto">
       {onClose && (
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-colors"
+          className="absolute top-2 right-2 md:top-4 md:right-4 z-10 bg-white/80 hover:bg-white rounded-full p-2 md:p-3 shadow-lg transition-colors"
         >
-          <X className="w-6 h-6 text-gray-700" />
+          <X className="w-5 h-5 md:w-6 md:h-6 text-gray-700" />
         </button>
       )}
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto">
         {/* Header */}
         <motion.div
           initial={{ y: -50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="text-center mb-8"
+          className="text-center mb-4 md:mb-8"
         >
-          <h1 className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg mb-2">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white drop-shadow-lg mb-1 md:mb-2">
             🎯 Nature Quests!
           </h1>
-          <p className="text-2xl text-white font-semibold">
+          <p className="text-lg sm:text-xl md:text-2xl text-white font-semibold">
             Complete fun missions!
           </p>
         </motion.div>
 
         {/* Quest cards */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 md:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {activeQuests.map((quest, index) => (
             <motion.div
               key={quest.id}

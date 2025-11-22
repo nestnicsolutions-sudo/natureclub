@@ -78,7 +78,7 @@ export default function SidebarNavigation({
 }: SidebarNavigationProps) {
   return (
     <motion.div
-      className="fixed left-0 top-12 sm:top-14 md:top-16 lg:top-20 bottom-0 w-48 sm:w-52 md:w-56 lg:w-60 xl:w-64 bg-white/95 backdrop-blur-lg shadow-2xl rounded-r-3xl z-40 overflow-y-auto overflow-x-hidden"
+      className="fixed left-0 top-12 sm:top-14 md:top-16 lg:top-20 bottom-0 w-16 sm:w-20 md:w-56 lg:w-60 xl:w-64 bg-white/95 backdrop-blur-lg shadow-2xl rounded-r-3xl z-40 overflow-y-auto overflow-x-hidden"
       initial={{ x: -300 }}
       animate={{ x: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
@@ -87,17 +87,18 @@ export default function SidebarNavigation({
         scrollbarColor: '#10b981 #e5e7eb'
       }}
     >
-      <div className="p-3 sm:p-4 md:p-5 lg:p-6">
-        <div className="mb-4 md:mb-6">
-          <h2 className="text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-1 md:mb-2">
+      <div className="p-2 sm:p-3 md:p-5 lg:p-6">
+        <div className="mb-2 sm:mb-4 md:mb-6 text-center md:text-left">
+          <h2 className="hidden md:block text-base md:text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-1 md:mb-2">
             🌿 Explore Nature
           </h2>
-          <p className="text-xs sm:text-sm text-gray-600">
+          <p className="hidden md:block text-xs sm:text-sm text-gray-600">
             Click to visit different habitats!
           </p>
+          <span className="md:hidden text-xl sm:text-2xl">🌿</span>
         </div>
         
-        <div className="space-y-2.5 sm:space-y-3">
+        <div className="space-y-2 sm:space-y-3">
         {natureSections.map((section, index) => (
           <motion.div
             key={section.id}

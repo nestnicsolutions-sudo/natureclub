@@ -21,7 +21,7 @@ export default function NatureSectionButton({
   return (
     <motion.button
       onClick={onClick}
-      className={`w-full p-4 rounded-2xl transition-all ${
+      className={`w-full p-2 sm:p-3 md:p-4 rounded-2xl transition-all ${
         isActive
           ? `${color} scale-105 shadow-2xl`
           : 'bg-white/80 hover:bg-white shadow-lg'
@@ -29,11 +29,11 @@ export default function NatureSectionButton({
       whileHover={{ scale: 1.05, x: 10 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="flex items-center gap-3">
-        <div className={`w-12 h-12 rounded-xl ${isActive ? 'bg-white/30' : color} flex items-center justify-center text-2xl`}>
+      <div className="flex items-center justify-center md:justify-start gap-0 md:gap-3">
+        <div className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-xl ${isActive ? 'bg-white/30' : color} flex items-center justify-center text-lg sm:text-xl md:text-2xl shrink-0`}>
           {icon}
         </div>
-        <span className={`font-bold text-lg ${isActive ? 'text-white' : 'text-gray-700'}`}>
+        <span className={`hidden md:block font-bold text-sm md:text-lg ${isActive ? 'text-white' : 'text-gray-700'}`}>
           {label}
         </span>
       </div>

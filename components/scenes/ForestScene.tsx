@@ -58,24 +58,51 @@ export default function ForestScene({ onAnimalClick, weather = 'sunny', isNight 
         }}
       />
       
-      {/* Trees in background */}
-      <AnimatedTree size={120} stage={4} className="absolute bottom-24 left-[5%] opacity-60" />
-      <AnimatedTree size={100} stage={3} className="absolute bottom-32 left-[25%] opacity-70" />
-      <AnimatedTree size={140} stage={4} className="absolute bottom-20 right-[8%] opacity-60" />
+      {/* Trees in background - Dense Forest Generation */}
+      {Array.from({ length: 20 }).map((_, i) => {
+        // Randomize position and size for natural look
+        const isBack = i < 12; // More trees in back
+        const bottomPos = isBack ? 35 + Math.random() * 12 : 15 + Math.random() * 20;
+        const size = isBack ? 80 + Math.random() * 60 : 150 + Math.random() * 100;
+        const leftPos = (i * 5) + Math.random() * 10; // Spread across width
+        const zIndex = Math.floor(50 - bottomPos); // Lower trees have higher z-index (closer)
+        
+        return (
+          <div 
+            key={`tree-${i}`}
+            className="absolute"
+            style={{ 
+              bottom: `${bottomPos}%`, 
+              left: `${leftPos}%`,
+              zIndex: zIndex,
+              filter: isBack ? 'blur(0.5px)' : 'none',
+              opacity: isBack ? 0.7 : 1
+            }}
+          >
+            <AnimatedTree 
+              size={size} 
+              stage={isBack ? 3 : 4} 
+              onClick={() => console.log('Tree clicked!')}
+            />
+          </div>
+        );
+      })}
       
-      {/* Main interactive trees */}
-      <AnimatedTree 
-        size={180} 
-        stage={4} 
-        className="absolute bottom-16 left-[15%]"
-        onClick={() => console.log('Tree clicked!')}
-      />
-      <AnimatedTree 
-        size={160} 
-        stage={4} 
-        className="absolute bottom-20 right-[20%]"
-        onClick={() => console.log('Tree clicked!')}
-      />
+      {/* Hero Trees (Interactive) */}
+      <div className="absolute bottom-[10%] left-[10%] z-20">
+        <AnimatedTree 
+          size={220} 
+          stage={4} 
+          onClick={() => console.log('Tree clicked!')}
+        />
+      </div>
+      <div className="absolute bottom-[12%] right-[15%] z-20">
+        <AnimatedTree 
+          size={200} 
+          stage={4} 
+          onClick={() => console.log('Tree clicked!')}
+        />
+      </div>
       
       {/* Forest animals */}
       <motion.div

@@ -14,6 +14,7 @@ import SummerScene from '@/components/scenes/SummerScene';
 import AutumnScene from '@/components/scenes/AutumnScene';
 import WinterScene from '@/components/scenes/WinterScene';
 import NatureQuests from '@/components/features/NatureQuests';
+import PlantGrowthGame from '@/components/features/PlantGrowthGame';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('forest');
@@ -25,6 +26,7 @@ export default function Home() {
   const [showLightning, setShowLightning] = useState(false);
   const [isWeatherCollapsed, setIsWeatherCollapsed] = useState(false);
   const [showQuests, setShowQuests] = useState(false);
+  const [showGames, setShowGames] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowIntro(false), 3500);
@@ -93,16 +95,16 @@ export default function Home() {
               transition={{ duration: 0.5 }}
             >
               <motion.div
-                className="text-center"
+                className="text-center px-4"
                 initial={{ scale: 0.5, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.8 }}
               >
-                <h1 className="text-6xl md:text-8xl font-bold text-white drop-shadow-2xl mb-4">
+                <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold text-white drop-shadow-2xl mb-2 sm:mb-4">
                   🌿 Nature Club! 🦋
                 </h1>
                 <motion.p
-                  className="text-2xl md:text-4xl text-white font-semibold"
+                  className="text-xl sm:text-2xl md:text-4xl text-white font-semibold"
                   animate={{
                     scale: [1, 1.1, 1],
                   }}
@@ -119,10 +121,10 @@ export default function Home() {
         </AnimatePresence>
 
         {/* Header */}
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 shadow-xl">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 shadow-xl">
           <div className="flex items-center justify-between">
             <motion.h1 
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg"
+              className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg truncate mr-2"
               animate={{
                 scale: [1, 1.05, 1],
               }}
@@ -133,38 +135,38 @@ export default function Home() {
             >
               🌳 Nature Club
             </motion.h1>
-            <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+            <div className="flex items-center gap-1 sm:gap-3 md:gap-4">
               {/* Feature Buttons */}
               <motion.button
-                className="bg-purple-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                className="bg-purple-500 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm md:text-base shadow-lg flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setShowQuests(true)}
               >
-                🎯 Quest
+                🎯 <span className="hidden sm:inline">Quest</span>
               </motion.button>
               
               <motion.button
-                className="bg-pink-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                className="bg-pink-500 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm md:text-base shadow-lg flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => alert("Kids Traits feature coming soon! (Face detection & Mood)")}
               >
-                😊 Traits
+                😊 <span className="hidden sm:inline">Traits</span>
               </motion.button>
               
               <motion.button
-                className="bg-orange-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-sm sm:text-base shadow-lg flex items-center gap-2"
+                className="bg-orange-500 text-white px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 rounded-full font-bold text-xs sm:text-sm md:text-base shadow-lg flex items-center gap-1 sm:gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => alert("Games feature coming soon! (Grow a plant, etc.)")}
+                onClick={() => setShowGames(true)}
               >
-                🎮 Games
+                🎮 <span className="hidden sm:inline">Games</span>
               </motion.button>
 
               {/* Badge display */}
               <motion.div
-                className="bg-yellow-400 text-yellow-900 px-3 sm:px-4 md:px-6 py-1.5 sm:py-2 md:py-3 rounded-full font-black text-sm sm:text-base md:text-lg shadow-lg"
+                className="bg-yellow-400 text-yellow-900 px-2 sm:px-3 md:px-6 py-1 sm:py-1.5 md:py-3 rounded-full font-black text-xs sm:text-sm md:text-lg shadow-lg"
                 whileHover={{ scale: 1.05 }}
               >
                 🏆 0
@@ -300,6 +302,19 @@ export default function Home() {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
               <NatureQuests onClose={() => setShowQuests(false)} />
             </div>
+          )}
+        </AnimatePresence>
+
+        {/* Sidebar Navigation */}
+        <AnimatePresence>
+          {showGames && (
+            <PlantGrowthGame 
+              onClose={() => setShowGames(false)} 
+              onComplete={() => {
+                const event = new CustomEvent('playSound', { detail: { type: 'success' } });
+                window.dispatchEvent(event);
+              }} 
+            />
           )}
         </AnimatePresence>
 
@@ -699,7 +714,7 @@ export default function Home() {
         </AnimatePresence>
 
         {/* Main scene area */}
-        <div className="ml-48 sm:ml-52 md:ml-56 lg:ml-60 xl:ml-64 pt-12 sm:pt-14 md:pt-16 lg:pt-20 h-screen overflow-hidden">
+        <div className="ml-16 sm:ml-20 md:ml-56 lg:ml-60 xl:ml-64 pt-12 sm:pt-14 md:pt-16 lg:pt-20 h-screen overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSection}
@@ -727,14 +742,14 @@ export default function Home() {
         <AnimatePresence>
           {showFactPopup && (
             <motion.div
-              className="fixed top-32 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-3xl shadow-2xl p-8 max-w-md"
+              className="fixed top-24 sm:top-32 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-3xl shadow-2xl p-6 md:p-8 w-[90%] max-w-md"
               initial={{ scale: 0, y: -50 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0, y: -50 }}
               transition={{ type: "spring", stiffness: 200 }}
             >
-              <h3 className="text-3xl font-bold text-purple-600 mb-4">Fun Fact! 💡</h3>
-              <p className="text-xl text-gray-700">{currentFact.fact}</p>
+              <h3 className="text-2xl md:text-3xl font-bold text-purple-600 mb-2 md:mb-4">Fun Fact! 💡</h3>
+              <p className="text-lg md:text-xl text-gray-700">{currentFact.fact}</p>
             </motion.div>
           )}
         </AnimatePresence>
