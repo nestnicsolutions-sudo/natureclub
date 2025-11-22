@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: transparent;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom scrollbar for kids */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f9ff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #93c5fd;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #60a5fa;
+}
+
+/* Touch-friendly animations */
+.tap-bounce {
+  transition: transform 0.1s ease-in-out;
+}
+
+.tap-bounce:active {
+  transform: scale(0.95);
+}
+
+/* Glow effect */
+.glow {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Prevent text selection for better touch experience */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
